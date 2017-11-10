@@ -11,5 +11,10 @@ public class tester{
       for (int i =0; i<toPrint.size(); i++){
          System.out.println(toPrint.get(i));
       }
+      Rack rack = new Rack(s);
+      toPrint = rack.returnSubsets();
+      for (int i =0; i<toPrint.size(); i++){
+         System.out.println(toPrint.get(i));
+      }
    }
 }

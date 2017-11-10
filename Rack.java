@@ -5,6 +5,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TreeSet;
 
 /**
  * A Rack of Scrabble tiles
@@ -13,6 +14,13 @@ import java.util.Arrays;
 public class Rack {
    private int[] rackMult;
    private String rackUnique;
+
+   public Rack(String s){
+      getCanon(s);
+   }
+   public ArrayList<String> returnSubsets(){
+      return allSubsets(rackUnique, rackMult, 0);
+   }
 
    /**
     * Finds all subsets of the multiset starting at position k in unique and mult.
@@ -56,20 +64,32 @@ public class Rack {
    /**
    adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
    */
+//   private void takeString(String s){
+//      TreeSet<char> charSet = new Treeset<char>();
+//      char[] charArray = s.toCharArray();
+//      for (int i = 0; i<charArray.length; i++){
+//	 charSet.add(charArray[i]);
+//      }
+//      int[] mult = new int[charSet.size()];
+//      for (int i = 0; i<charSet.size(); i++){
+//	 for (int j = 0; i<charArray.length; j++){
+//	    if 
+//   }
+
    private void getCanon(String s) {
       char[] charArray = s.toCharArray();
-      String unique = charArray[0];
       Arrays.sort(charArray);
+      String unique = Character.toString(charArray[0]);
       int letterPosition = 0;
       int uniqueLetters = 0;
       int[] mult = new int[charArray.length];
       mult[0] = 1;
-      for(i = 1; i<charArray.length; i++) {
+      for(int i = 1; i<charArray.length; i++) {
 	 if (charArray[i] == charArray[letterPosition]) {
 	    mult[uniqueLetters]++;
 	 }
 	 else {
-	    unique += charArray[i];
+	    unique += Character.toString(charArray[i]);
 	    letterPosition = i;
 	    uniqueLetters++;
 	    mult[uniqueLetters]++;
@@ -77,5 +97,6 @@ public class Rack {
       }
       rackUnique = unique;
       rackMult = mult;
+      System.out.println(unique);
    }
 }
