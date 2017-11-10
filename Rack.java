@@ -57,28 +57,25 @@ public class Rack {
    adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
    */
    private void getCanon(String s) {
-      char charArray[] = s.toCharArray();
+      char[] charArray = s.toCharArray();
+      String unique = charArray[0];
       Arrays.sort(charArray);
-      int unique = 0;
+      int letterPosition = 0;
+      int uniqueLetters = 0;
       int[] mult = new int[charArray.length];
-      for (int i = 0; i<charArray.length-1; i++){
-	 mult[unique]++;
-	 for(int j = i+1; j<charArray.length; j++){
-	    if (charArray[j] == charArray[i]) {
-	       mult[unique]++;
-	    }
-	    else {
-	       unique++;
-	       i = j-1;
-	       break;
-	    }
+      mult[0] = 1;
+      for(i = 1; i<charArray.length; i++) {
+	 if (charArray[i] == charArray[letterPosition]) {
+	    mult[uniqueLetters]++;
+	 }
+	 else {
+	    unique += charArray[i];
+	    letterPosition = i;
+	    uniqueLetters++;
+	    mult[uniqueLetters]++;
 	 }
       }
-      rackMult = new int[unique+1];
-
-
-
+      rackUnique = unique;
+      rackMult = mult;
    }
-
-   
 }
