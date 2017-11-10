@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 
 /**
@@ -18,7 +19,7 @@ import java.util.Arrays;
 
 public class AnagramDictionary {
    private File file;
-   private Map<String,LinkedList<String>> dict;
+   private HashMap<String,LinkedList<String>> dict;
    
 
 
@@ -55,8 +56,8 @@ public class AnagramDictionary {
        return new ArrayList<String>(); // DUMMY CODE TO GET IT TO COMPILE
    }
 
-   private Map<String,LinkedList<String>> createDict(Scanner in){
-      Map<String,LinkedList<String>> temp = new Map<String,LinkedList<String>>;
+   private HashMap<String,LinkedList<String>> createDict(Scanner in){
+      HashMap<String,LinkedList<String>> temp = new HashMap<String,LinkedList<String>>;
       String word = new String;
       String canon = new String;
       while(in.hasNextLine) {
