@@ -4,6 +4,7 @@
 // Fall 2017
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A Rack of Scrabble tiles
@@ -59,10 +60,10 @@ public class Rack {
       char charArray[] = s.toCharArray();
       Arrays.sort(charArray);
       int unique = 0;
-      int[] mult = new int[charArray.length()];
-      for (int i = 0; i<charArray.length()-1; i++){
+      int[] mult = new int[charArray.length];
+      for (int i = 0; i<charArray.length-1; i++){
 	 mult[unique]++;
-	 for(int j = i+1; j<charArray.length(); j++){
+	 for(int j = i+1; j<charArray.length; j++){
 	    if (charArray[j] == charArray[i]) {
 	       mult[unique]++;
 	    }
