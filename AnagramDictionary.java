@@ -5,6 +5,8 @@
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Arrays;
 
 
 /**
@@ -15,6 +17,8 @@ import java.util.ArrayList;
  */
 
 public class AnagramDictionary {
+   private File file;
+   private Map<String,LinkedList<String>> dict;
    
 
 
@@ -26,7 +30,13 @@ public class AnagramDictionary {
     * @throws FileNotFoundException  if the file is not found
     */
    public AnagramDictionary(String fileName) throws FileNotFoundException {
-
+      inFile = new File(fileName);
+      try (Scanner in = new Scanner(inFile)) {
+	 dict = createDict(in);
+      }
+      catch (FileNotFoundException exception) {
+	 System.out.println("File not found: " + exception.getMessage());
+      }
    }
    
 
@@ -38,8 +48,45 @@ public class AnagramDictionary {
     * 
     */
    public ArrayList<String> getAnagramsOf(String s) {
+       String canon = getCanon(s);
+       if (dict.containsKey(canon)){
+	  return dict.get(canon);
+       }
        return new ArrayList<String>(); // DUMMY CODE TO GET IT TO COMPILE
    }
+
+   private Map<String,LinkedList<String>> createDict(Scanner in){
+      Map<String,LinkedList<String>> temp = new Map<String,LinkedList<String>>;
+      String word = new String;
+      String canon = new String;
+      while(in.hasNextLine) {
+	 word = in.nextLine();
+	 canon = getCanon(word);
+	 if (!temp.containsKey(canon)){
+	    LinkedList<String> temp2 = new LinkedList<String>;
+	    temp2.add(word);
+	    temp.put(canon,temp2);
+	 }
+	 else {
+	    LinkedList<String> temp2 = new LinkedList<String>;
+	    temp2 = temp.get(canon);
+	    temp2.add(word);
+	    temp.put(canon,temp2);
+	 }
+      }
+      return temp;
+   }
+
+   /**
+   adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
+   */
+   private String getCanon(String s) {
+      char charArray[] = s.toCharArray();
+      Arrays.sort(charArray);
+      return new String(charArray);
+   }
+
+
    
    
 }

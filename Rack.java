@@ -10,9 +10,6 @@ import java.util.ArrayList;
  */
 
 public class Rack {
-   
-
-
 
    /**
     * Finds all subsets of the multiset starting at position k in unique and mult.
