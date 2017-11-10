@@ -10,6 +10,8 @@ import java.util.ArrayList;
  */
 
 public class Rack {
+   private int[] rackMult;
+   private String rackUnique;
 
    /**
     * Finds all subsets of the multiset starting at position k in unique and mult.
@@ -48,6 +50,33 @@ public class Rack {
       }
       
       return allCombos;
+   }
+
+   /**
+   adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
+   */
+   private void getCanon(String s) {
+      char charArray[] = s.toCharArray();
+      Arrays.sort(charArray);
+      int unique = 0;
+      int[] mult = new int[charArray.length()];
+      for (int i = 0; i<charArray.length()-1; i++){
+	 mult[unique]++;
+	 for(int j = i+1; j<charArray.length(); j++){
+	    if (charArray[j] == charArray[i]) {
+	       mult[unique]++;
+	    }
+	    else {
+	       unique++;
+	       i = j-1;
+	       break;
+	    }
+	 }
+      }
+      rackMult = new int[unique+1];
+
+
+
    }
 
    
