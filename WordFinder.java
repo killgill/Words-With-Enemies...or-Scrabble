@@ -1,9 +1,13 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.Collections;
 
 public class WordFinder {
-   private AnagramDictionary dict;
+   private static AnagramDictionary dict;
+   private static ScoreTable scoreTable;
    public static void main(String[] args) throws FileNotFoundException {
       String filename = "sowpods.txt";
       if (args.length > 0) {
@@ -11,13 +15,14 @@ public class WordFinder {
       }
 
       dict = new AnagramDictionary(filename);
+      scoreTable = new ScoreTable();
       System.out.println("Type . to quit");
       Scanner in = new Scanner(System.in);
       run(in);
 
    }
 
-   private void run(Scanner in){
+   private static void run(Scanner in){
       System.out.print("Rack? ");
       String s = in.nextLine();
       if (s.equals(".")){
@@ -25,17 +30,33 @@ public class WordFinder {
       }
       Rack rack = new Rack(s);
       ArrayList<String> allSubsets = rack.returnSubsets();
+      ArrayList<String> allWords = new ArrayList<String>();
 
-      ArrayList<String> toPrint = dict.getAnagramsOf(s);
-      for (int i =0; i<toPrint.size(); i++){
-         System.out.println(toPrint.get(i));
+      for (int i = 0; i<allSubsets.size(); i++){
+	 allWords.addAll(dict.getAnagramsOf(allSubsets.get(i)));
       }
-      toPrint = rack.returnSubsets();
-      for (int i =0; i<toPrint.size(); i++){
-         System.out.println(toPrint.get(i));
+      
+      TreeMap<Integer,ArrayList<String>> scores = new TreeMap<Integer,ArrayList<String>>();
+      for (int i = 0; i<allWords.size(); i++){
+	 int temp1 = scoreTable.getScore(allWords.get(i));
+	 if (!scores.containsKey(temp1)) {
+	   ArrayList<String> temp2 = new ArrayList<String>();
+	   temp2.add(allWords.get(i));
+	   scores.put(temp1, temp2);
+	 }
+	 else {
+	    ArrayList<String> temp2 = scores.get(temp1);
+	    temp2.add(allWords.get(i));
+	    Collections.sort(temp2);
+	    scores.put(temp1,temp2);
+	 }
       }
-
-
+      for (Map.Entry<Integer, ArrayList<String>> curr : scores.entrySet()) {
+	 int temp3 = (curr.getValue()).size();
+	 for (int i = 0; i<temp3; i++) {
+	    System.out.println(curr.getKey() + ": " + (curr.getValue()).get(i));
+	 }
+      }
       run(in);
 
    }

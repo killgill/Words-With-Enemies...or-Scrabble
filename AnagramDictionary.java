@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.io.File;
 import java.util.Scanner;
+import java.util.Collections;
 
 
 /**
@@ -72,6 +73,7 @@ public class AnagramDictionary {
 	 else {
 	    temp2 = temp.get(canon);
 	    temp2.add(word);
+	    Collections.sort(temp2);
 	    temp.put(canon,temp2);
 	 }
       }
@@ -86,8 +88,5 @@ public class AnagramDictionary {
       Arrays.sort(charArray);
       return new String(charArray);
    }
-
-
-   
    
 }
