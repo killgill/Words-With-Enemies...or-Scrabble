@@ -97,6 +97,5 @@ public class Rack {
       }
       rackUnique = unique;
       rackMult = mult;
-      System.out.println(unique);
    }
 }

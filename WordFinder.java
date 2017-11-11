@@ -16,7 +16,7 @@ public class WordFinder {
 
       dict = new AnagramDictionary(filename);
       scoreTable = new ScoreTable();
-      System.out.println("Type . to quit");
+      System.out.println("Type . to quit.");
       Scanner in = new Scanner(System.in);
       run(in);
 
@@ -36,7 +36,7 @@ public class WordFinder {
 	 allWords.addAll(dict.getAnagramsOf(allSubsets.get(i)));
       }
       
-      TreeMap<Integer,ArrayList<String>> scores = new TreeMap<Integer,ArrayList<String>>();
+      TreeMap<Integer,ArrayList<String>> scores = new TreeMap<Integer,ArrayList<String>>(Collections.reverseOrder());
       for (int i = 0; i<allWords.size(); i++){
 	 int temp1 = scoreTable.getScore(allWords.get(i));
 	 if (!scores.containsKey(temp1)) {
@@ -50,6 +50,10 @@ public class WordFinder {
 	    Collections.sort(temp2);
 	    scores.put(temp1,temp2);
 	 }
+      }
+      System.out.println(String.format("We can make %d words from \"%s\"",allWords.size(),dict.getCanon(s)));
+      if (allWords.size()>0) {
+         System.out.println("All of the words with their scores (sorted by score):");
       }
       for (Map.Entry<Integer, ArrayList<String>> curr : scores.entrySet()) {
 	 int temp3 = (curr.getValue()).size();

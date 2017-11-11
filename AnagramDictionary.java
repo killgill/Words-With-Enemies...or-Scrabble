@@ -39,6 +39,7 @@ public class AnagramDictionary {
       }
       catch (FileNotFoundException exception) {
 	 System.out.println("File not found: " + exception.getMessage());
+	 System.exit(0);
       }
    }
    
@@ -55,15 +56,15 @@ public class AnagramDictionary {
        if (dict.containsKey(canon)){
 	  return dict.get(canon);
        }
-       return new ArrayList<String>(); // DUMMY CODE TO GET IT TO COMPILE
+       return new ArrayList<String>(); 
    }
 
    private HashMap<String,ArrayList<String>> createDict(Scanner in){
       HashMap<String,ArrayList<String>> temp = new HashMap<String,ArrayList<String>>();
       String word;
       String canon;
-      while(in.hasNextLine()) {
-	 word = in.nextLine();
+      while(in.hasNext()) {
+	 word = in.next();
 	 canon = getCanon(word);
 	 ArrayList<String> temp2 = new ArrayList<String>();
 	 if (!temp.containsKey(canon)){
@@ -83,7 +84,7 @@ public class AnagramDictionary {
    /**
    adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
    */
-   private String getCanon(String s) {
+   public String getCanon(String s) {
       char charArray[] = s.toCharArray();
       Arrays.sort(charArray);
       return new String(charArray);
