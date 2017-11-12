@@ -27,6 +27,10 @@ and what sections of the textbook are involved (if applicable): [you do
 not need to list any of the code that we wrote for the assignment,
 i.e., the contents of the starter files for the assignment]
 
+The getCanon methods in AnagramDictionary and WordFinder were directly adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ and it's used to sort a string alphabetically.
+Similarly, the getCanon method in Rack was also adapted from there, but with some extra steps added in order to create the representation required for the allSubsets method of Rack.
+
+
 ----------------------------------------------
 KNOWN BUGS or LIMITATIONS:
 
