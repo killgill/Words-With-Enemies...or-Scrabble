@@ -3,13 +3,20 @@
 // CS 455 PA4
 // Fall 2017
 
+/**
+A hardcoded table of scores for each scrabble letter
+*/
 public class ScoreTable {
    private int[] scores;
 
+   /**
+   The constructor hardcodes the scores Array based on each letter's 
+   position in the alphabet
+   */
    public ScoreTable() {
       
       scores = new int[26];
-      
+
       for (int i = 0; i<26; i++) {
          if (i == 0 || i == 4 || i == 8 || i == 11 || i == 13 || i ==14 ||
          i == 17 || i == 18 || i == 19 || i == 20) {
@@ -36,12 +43,15 @@ public class ScoreTable {
       }
 
    }
-
+   /**
+   The getScore method takes an input string, converts it to lower case just in case there are any
+   uppercase letters, and then finds the score with a simple loop
+   */
    public int getScore(String word) {
       String lower = word.toLowerCase();
       int score = 0;
       for (int i = 0; i< lower.length(); i++) {
-         score += scores[lower.charAt(i)-'a'];
+         score += scores[lower.charAt(i)-'a']; //the character 'a' is used as an index as suggested in the PA4 problem statement
       }
       return score;
    }

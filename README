@@ -27,19 +27,47 @@ and what sections of the textbook are involved (if applicable): [you do
 not need to list any of the code that we wrote for the assignment,
 i.e., the contents of the starter files for the assignment]
 
-The getCanon methods in AnagramDictionary and WordFinder were directly adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ and it's used to sort a string alphabetically.
-Similarly, the getCanon method in Rack was also adapted from there, but with some extra steps added in order to create the representation required for the allSubsets method of Rack.
+The getCanon methods in AnagramDictionary and WordFinder were directly 
+adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/
+and it's used to sort a string alphabetically.
+Similarly, the getCanon method in Rack was also adapted from there, 
+but with some extra steps added in order to create the 
+representation required for the allSubsets method of Rack.
 
 
 ----------------------------------------------
 KNOWN BUGS or LIMITATIONS:
 
-
+None
 
 ----------------------------------------------
 DESCRIPTION OF YOUR CLASS DESIGN AND ALGORITHMS AND DATA STRUCTURES USED:
 
+The Rack class stores the current rack of letters by using a string and an int[]. 
+These are the input arguments for the allSubsets method that was already provided,
+and so it seemed the smartest way to store the rack.
 
+The AnagramDictionary class stores the dictionary in a HashMap<String,ArrayList<String>>
+A HashMap was chosen because the value associated with a key can be looked up in
+constant time. The key used was the "canonical" form of a dictionary word which is
+simply its letters arranged in alphabetical order. Each key was associated with an 
+arraylist of strings which contained all the words that were anagrams of that key. 
+The getAnagramsOf method would simply convert the input string to its canonical form
+(which takes the time to sort the letters of the string) and then return the values associated
+with that key (which takes constant time to look up and linear time to the set size to return).
+
+The Scoretable class simply uses an array of 26 ints to represent the score associated 
+with each lowercase letter. The getScore method takes a string, converts it to lowercase, 
+and then loops through the string to find the score using the array and indexing the
+characters with 'a'.
+
+The WordFinder class stores an instance of an AnagramDictionary and a ScoreTable to lookup
+words. It uses ArrayLists of strings to store all subsets of the rack and also all possible
+anagrams. All these anagrams are then put into a TreeMap where the keys are the scores and 
+the values are arraylists of all words that make that score. The TreeMap is sorted in reverse
+so that the scores are output in descending order. The arraylist associated with each key is
+sorted alphabetically so that when multiple words have the same score, they can be printed in
+alphabetical order.
 
 ----------------------------------------------
 ANY OTHER NOTES FOR THE GRADER:

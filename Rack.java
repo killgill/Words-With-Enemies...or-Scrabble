@@ -12,14 +12,21 @@ import java.util.TreeSet;
  */
 
 public class Rack {
+   //The rack is stored in the same form that is required for the allSubsets method for ease of use.
    private int[] rackMult;
    private String rackUnique;
-
+   /**
+   The constructor just calls the method which creates the canonical form (i.e. the form with mult and unique)
+   so that the allSubsets method can later be called
+   */
    public Rack(String s){
       getCanon(s);
    }
+   /**
+   Returns all possible subsets of the Rack
+   */
    public ArrayList<String> returnSubsets(){
-      return allSubsets(rackUnique, rackMult, 0);
+      return new ArrayList<String>(allSubsets(rackUnique, rackMult, 0)); //ensures that original object can't be modified
    }
 
    /**
@@ -62,7 +69,9 @@ public class Rack {
    }
 
    /**
-   Adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
+   Adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/
+   This method first sorts the string in alphabetical order, and then uses a for loop 
+   to construct the unique String and the mult Array
    */
    private void getCanon(String s) {
       char[] charArray = s.toCharArray();
