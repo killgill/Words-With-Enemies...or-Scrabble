@@ -1,5 +1,5 @@
-// Name: 
-// USC NetID: 
+// Name: Karan Singh Gill
+// USC NetID: karansig
 // CS 455 PA4
 // Fall 2017
 
@@ -35,11 +35,11 @@ public class AnagramDictionary {
    public AnagramDictionary(String fileName) throws FileNotFoundException {
       inFile = new File(fileName);
       try (Scanner in = new Scanner(inFile)) {
-	 dict = createDict(in);
+    dict = createDict(in);
       }
       catch (FileNotFoundException exception) {
-	 System.out.println("File not found: " + exception.getMessage());
-	 System.exit(0);
+    System.out.println("File not found: " + exception.getMessage());
+    System.exit(0);
       }
    }
    
@@ -54,7 +54,7 @@ public class AnagramDictionary {
    public ArrayList<String> getAnagramsOf(String s) {
        String canon = getCanon(s);
        if (dict.containsKey(canon)){
-	  return dict.get(canon);
+     return dict.get(canon);
        }
        return new ArrayList<String>(); 
    }
@@ -64,25 +64,26 @@ public class AnagramDictionary {
       String word;
       String canon;
       while(in.hasNext()) {
-	 word = in.next();
-	 canon = getCanon(word);
-	 ArrayList<String> temp2 = new ArrayList<String>();
-	 if (!temp.containsKey(canon)){
-	    temp2.add(word);
-	    temp.put(canon,temp2);
-	 }
-	 else {
-	    temp2 = temp.get(canon);
-	    temp2.add(word);
-	    Collections.sort(temp2);
-	    temp.put(canon,temp2);
-	 }
+    word = in.next();
+    canon = getCanon(word);
+    ArrayList<String> temp2 = new ArrayList<String>();
+    if (!temp.containsKey(canon)){
+       temp2.add(word);
+       temp.put(canon,temp2);
+    }
+    else {
+       temp2 = temp.get(canon);
+       temp2.add(word);
+       Collections.sort(temp2);
+       temp.put(canon,temp2);
+    }
       }
       return temp;
    }
 
    /**
-   adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
+   This code was adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
+   It takes a string and returns the string sorted in alphabetical order
    */
    public String getCanon(String s) {
       char charArray[] = s.toCharArray();

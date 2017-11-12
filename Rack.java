@@ -1,5 +1,5 @@
-// Name: 
-// USC NetID: 
+// Name: Karan Singh Gill
+// USC NetID: karansig
 // CS 455 PA4
 // Fall 2017
 
@@ -62,20 +62,8 @@ public class Rack {
    }
 
    /**
-   adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
+   Adapted from http://www.geeksforgeeks.org/sort-a-string-in-java-2-different-ways/ 
    */
-//   private void takeString(String s){
-//      TreeSet<char> charSet = new Treeset<char>();
-//      char[] charArray = s.toCharArray();
-//      for (int i = 0; i<charArray.length; i++){
-//	 charSet.add(charArray[i]);
-//      }
-//      int[] mult = new int[charSet.size()];
-//      for (int i = 0; i<charSet.size(); i++){
-//	 for (int j = 0; i<charArray.length; j++){
-//	    if 
-//   }
-
    private void getCanon(String s) {
       char[] charArray = s.toCharArray();
       Arrays.sort(charArray);
@@ -85,15 +73,15 @@ public class Rack {
       int[] mult = new int[charArray.length];
       mult[0] = 1;
       for(int i = 1; i<charArray.length; i++) {
-	 if (charArray[i] == charArray[letterPosition]) {
-	    mult[uniqueLetters]++;
-	 }
-	 else {
-	    unique += Character.toString(charArray[i]);
-	    letterPosition = i;
-	    uniqueLetters++;
-	    mult[uniqueLetters]++;
-	 }
+         if (charArray[i] == charArray[letterPosition]) {
+            mult[uniqueLetters]++;
+         }
+         else {
+            unique += Character.toString(charArray[i]);
+            letterPosition = i;
+            uniqueLetters++;
+            mult[uniqueLetters]++;
+         }
       }
       rackUnique = unique;
       rackMult = mult;
