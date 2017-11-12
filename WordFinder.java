@@ -27,7 +27,7 @@ public class WordFinder {
       scrabble.scoreTable = new ScoreTable();
       System.out.println("Type . to quit.");
       Scanner in = new Scanner(System.in);
-      scrabble.run(in,scrabble);
+      scrabble.run(in);
 
    }
 
@@ -37,7 +37,7 @@ public class WordFinder {
       return new String(charArray);
    }
 
-   private void run(Scanner in, WordFinder scrabble){
+   private void run(Scanner in){
       System.out.print("Rack? ");
       String s = in.nextLine();
       if (s.equals(".")){
@@ -49,12 +49,12 @@ public class WordFinder {
       ArrayList<String> allWords = new ArrayList<String>();
 
       for (int i = 0; i<allSubsets.size(); i++){
-         allWords.addAll(scrabble.dict.getAnagramsOf(allSubsets.get(i)));
+         allWords.addAll(this.dict.getAnagramsOf(allSubsets.get(i)));
       }
       
-      TreeMap<Integer,ArrayList<String>> scores = scrabble.scoresAndWords(allWords, scrabble);
+      TreeMap<Integer,ArrayList<String>> scores = this.scoresAndWords(allWords);
 
-      System.out.println(String.format("We can make %d words from \"%s\"",allWords.size(),scrabble.getCanon(s)));
+      System.out.println(String.format("We can make %d words from \"%s\"",allWords.size(),this.getCanon(s)));
       if (allWords.size()>0) {
          System.out.println("All of the words with their scores (sorted by score):");
       }
@@ -65,13 +65,13 @@ public class WordFinder {
                System.out.println(curr.getKey() + ": " + (curr.getValue()).get(i));
          }
       }
-      scrabble.run(in,scrabble);
+      this.run(in);
    }
 
-   private TreeMap<Integer,ArrayList<String>> scoresAndWords(ArrayList<String> allWords, WordFinder scrabble) {
+   private TreeMap<Integer,ArrayList<String>> scoresAndWords(ArrayList<String> allWords) {
       TreeMap<Integer,ArrayList<String>> scores = new TreeMap<Integer,ArrayList<String>>(Collections.reverseOrder());
       for (int i = 0; i<allWords.size(); i++){
-         int temp1 = scrabble.scoreTable.getScore(allWords.get(i));
+         int temp1 = this.scoreTable.getScore(allWords.get(i));
          if (!scores.containsKey(temp1)) {
             ArrayList<String> temp2 = new ArrayList<String>();
             temp2.add(allWords.get(i));
